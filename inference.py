@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from timm.data import create_dataset, create_loader, resolve_data_config, ImageNetInfo, infer_imagenet_subset
+from timm.data import create_dataset, create_loader, resolve_data_config, ImageNetInfo, infer_imagenet_subset, readers
 from timm.layers import apply_test_time_pool
 from timm.models import create_model
 from timm.utils import AverageMeter, setup_default_logging, set_jit_fuser, ParseKwargs
@@ -229,7 +229,6 @@ def main():
         root=root_dir,
         name=args.dataset,
         split=args.split,
-        class_map=args.class_map,
     )
 
     if test_time_pool:
@@ -324,6 +323,10 @@ def main():
         data_dict[output_col] = list(all_outputs)
 
     df = pd.DataFrame(data=data_dict)
+    if args.class_map:
+        class_map = readers.class_map.load_class_map(args.class_map)
+        class_map_inv = {v: k for k, v in class_map.items()}
+        df['prob'] = df['prob'].map(lambda x: {class_map_inv[i]: v for i, v in enumerate(x)})
 
     results_filename = args.results_file
     if results_filename:
