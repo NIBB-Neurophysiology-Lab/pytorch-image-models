@@ -1,14 +1,21 @@
-[tool.pytest.ini_options]
-markers = [
-    "base: marker for model tests using the basic setup",
-    "cfg: marker for model tests checking the config",
-    "torchscript: marker for model tests using torchscript",
-    "features: marker for model tests checking feature extraction",
-    "fxforward: marker for model tests using torch fx (only forward)",
-    "fxbackward: marker for model tests using torch fx (only backward)",
-]
+[tool.poetry]
+name = "pytorch-image-models"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "pytorch_image_models"}]
 
-[tool.black]
-line-length = 120
-target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
-skip-string-normalization = true
+[tool.poetry.dependencies]
+python = "^3.9"
+torch = ">=1.7"
+torchvision = "^0.15.1"
+pyyaml = "^6.0"
+huggingface-hub = "^0.14.1"
+safetensors = ">=0.2"
+pandas = "^2.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
