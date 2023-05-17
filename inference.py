@@ -131,7 +131,7 @@ parser.add_argument('--results-format', type=str, nargs='+', default=['csv'],
                     help='results format (one of "csv", "json", "json-split", "parquet")')
 parser.add_argument('--results-separate-col', action='store_true', default=False,
                     help='separate output columns per result index.')
-parser.add_argument('--topk', default=1, type=int,
+parser.add_argument('--topk', default=0, type=int,
                     metavar='N', help='Top-k to output to CSV')
 parser.add_argument('--fullname', action='store_true', default=False,
                     help='use full sample name in output (not just basename).')
