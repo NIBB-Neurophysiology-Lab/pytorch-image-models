@@ -88,12 +88,14 @@ def main():
 
     filenames = loader.dataset.filenames()
     for batch_idx, (input, target) in enumerate(loader):
-        vis_image = input[0].cpu().numpy().transpose((1, 2, 0))
+        vis_image = (input[0].cpu().numpy().transpose((1, 2, 0)) + 1.0) / 2.0
         label = [ClassifierOutputTarget(target[0])]
         grayscale_cam = cam(input_tensor=input, targets=label)
         grayscale_cam = grayscale_cam[0, :]
         visualization = show_cam_on_image(vis_image, grayscale_cam, use_rgb=True)
-        plt.imshow(visualization)
+        fig, ax = plt.subplots()
+        im = ax.imshow(visualization, cmap="jet")
+        fig.colorbar(im)
         plt.savefig(f"gradcam/{filenames[batch_idx]}.png")
 
 
