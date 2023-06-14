@@ -59,12 +59,13 @@ def main():
         checkpoint_path=args.checkpoint,
         **args.model_kwargs,
     )
+    print(model)
     data_config = resolve_data_config(vars(args), model=model)
     test_time_pool = False
     if args.test_pool:
         model, test_time_pool = apply_test_time_pool(model, data_config)
 
-    target_layers = [getattr(model, args.layer_name)]
+    target_layers = [eval("model." + args.layer_name)]
     cam = GradCAM(model = model, target_layers = target_layers, use_cuda = torch.cuda.is_available())
 
     root_dir = args.data or args.data_dir
