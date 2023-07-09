@@ -8,13 +8,14 @@ packages = [{include = "pytorch_image_models"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-torch = ">=1.7"
-torchvision = "^0.15.1"
+torch = "1.13.0"
+torchvision = "0.14.0"
 pyyaml = "^6.0"
 huggingface-hub = "^0.14.1"
 safetensors = ">=0.2"
 pandas = "^2.0.1"
 grad-cam = "^1.4.6"
+torchcam = "^0.3.2"
 
 
 [build-system]
