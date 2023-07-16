@@ -40,7 +40,7 @@ parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                     help='use pre-trained model')
 parser.add_argument('--test-pool', dest='test_pool', action='store_true',
                     help='enable test time pool')
-parser.add_argument('--layer-names', nargs="*", default=['conv_head'], type=list, help='layer names')
+parser.add_argument('--layer-names', nargs="*", default=['conv_head'], type=str, help='layer names')
 parser.add_argument('--model-kwargs', nargs='*', default={}, action=ParseKwargs)
 
 
